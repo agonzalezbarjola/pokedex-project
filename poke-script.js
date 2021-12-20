@@ -52,7 +52,7 @@ const getPokemonTypes = (types) => {
 };**/
 
 const poke_container = document.getElementById("poke_main_container");
-const pokemons_number = 150;
+const pokemons_number = 151;
 
 const searchMainPoke = async () => {
   for (let i = 1; i <= pokemons_number; i++) {
