@@ -51,24 +51,27 @@ const getPokemonTypes = (types) => {
   });
 };**/
 
+/**CATÁLOGO MAIN POKEMONS 151 */
+
+
 const poke_container = document.getElementById("poke_main_container");
 const pokemons_number = 151;
 
-const searchMainPoke = async () => {
+const getMainPoke = async () => {
   for (let i = 1; i <= pokemons_number; i++) {
-    await getPokemonsMain(i);
+    await getPokemonsId(i);
   }
 };
 
-const getPokemonsMain = async (id) => {
+const getPokemonsId = async (id) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
   const res = await fetch(url);
   const pokemonmain = await res.json();
 
-  createPokemonMainCards(pokemonmain);
+  createPokemonFeedCards(pokemonmain);
 };
 
-const createPokemonMainCards = (pokemonmain) => {
+const createPokemonFeedCards = (pokemonmain) => {
   const pokemonEl = document.createElement("div");
   pokemonEl.classList.add("pokemonmain");
   const { id, name, sprites, types } = pokemonmain;
@@ -84,4 +87,5 @@ const createPokemonMainCards = (pokemonmain) => {
   poke_main_container.appendChild(pokemonEl);
 };
 
-searchMainPoke();
+getMainPoke();
+
