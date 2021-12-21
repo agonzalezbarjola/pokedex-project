@@ -1,3 +1,45 @@
+
+
+/**CATÁLOGO FEED POKEMONS 151 */
+
+
+const poke_container = document.getElementById("poke_main_container");
+const pokemons_number = 151;
+
+const getFeedPoke = async () => {
+  for (let i = 1; i <= pokemons_number; i++) {
+    await getPokemonsId(i);
+  }
+};
+
+const getPokemonsId = async (id) => {
+  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+  const res = await fetch(url);
+  const pokemonfeed = await res.json();
+
+  createPokemonFeedCards(pokemonfeed);
+};
+
+const createPokemonFeedCards = (pokemonfeed) => {
+  const pokemonEl = document.createElement("div");
+  pokemonEl.classList.add("pokemonfeed");
+  const { id, name, sprites, types } = pokemonfeed;
+  const type = types[0].type.name;
+  const pokeInnerHTML = `<div class="img-feed-container"> <img src="${sprites.other.dream_world.front_default}"/>
+  </div>
+  <div class="infoFeed">
+  <span class="numberFeed">id # ${id}</span>
+  <h3 class="nameFeed">${name}</h3>
+  <div class="typeMain">${type}</div>
+  </div>`;
+  pokemonEl.innerHTML = pokeInnerHTML;
+  poke_feed_container.appendChild(pokemonEl);
+};
+
+getFeedPoke();
+
+
+//** BUSCADOR (EN TODA LA API) */
 const pokeCard$$ = document.querySelector("[data-container]");
 const pokeName$$ = document.querySelector("[data-container-name]");
 const pokeImgCont$$ = document.querySelector("[data-container-img]");
@@ -50,42 +92,3 @@ const getPokemonTypes = (types) => {
     pokeStats.appendChild(statsElement);
   });
 };**/
-
-/**CATÁLOGO MAIN POKEMONS 151 */
-
-
-const poke_container = document.getElementById("poke_main_container");
-const pokemons_number = 151;
-
-const getMainPoke = async () => {
-  for (let i = 1; i <= pokemons_number; i++) {
-    await getPokemonsId(i);
-  }
-};
-
-const getPokemonsId = async (id) => {
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-  const res = await fetch(url);
-  const pokemonmain = await res.json();
-
-  createPokemonFeedCards(pokemonmain);
-};
-
-const createPokemonFeedCards = (pokemonmain) => {
-  const pokemonEl = document.createElement("div");
-  pokemonEl.classList.add("pokemonmain");
-  const { id, name, sprites, types } = pokemonmain;
-  const type = types[0].type.name;
-  const pokeInnerHTML = `<div class="img-main-container"> <img src="${sprites.other.dream_world.front_default}"/>
-  </div>
-  <div class="infoMain">
-  <span class="numberMain">id # ${id}</span>
-  <h3 class="nameMain">${name}</h3>
-  <div class="typeMain">${type}</div>
-  </div>`;
-  pokemonEl.innerHTML = pokeInnerHTML;
-  poke_main_container.appendChild(pokemonEl);
-};
-
-getMainPoke();
-
